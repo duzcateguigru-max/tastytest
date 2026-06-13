@@ -24,13 +24,13 @@ export interface OrderMenu {
 }
 
 export const ORDER_STATUSES: Record<number, { label: string; color: string }> = {
-  1:  { label: 'Pending',     color: '#fbbf24' },
-  2:  { label: 'Processing',  color: '#3b82f6' },
-  3:  { label: 'Preparing',   color: '#8b5cf6' },
-  4:  { label: 'In Transit',  color: '#f59e0b' },
-  5:  { label: 'Delivered',   color: '#10b981' },
-  6:  { label: 'Cancelled',   color: '#ef4444' },
-  99: { label: 'Completed',   color: '#10b981' },
+  1:  { label: 'Pendiente',    color: '#fbbf24' },
+  2:  { label: 'Procesando',  color: '#3b82f6' },
+  3:  { label: 'Preparando',  color: '#8b5cf6' },
+  4:  { label: 'En Camino',   color: '#f59e0b' },
+  5:  { label: 'Entregado',   color: '#10b981' },
+  6:  { label: 'Cancelado',   color: '#ef4444' },
+  99: { label: 'Completado',  color: '#10b981' },
 }
 
 export const useOrdersStore = defineStore('orders', () => {

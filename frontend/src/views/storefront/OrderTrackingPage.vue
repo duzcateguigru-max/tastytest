@@ -2,12 +2,12 @@
   <div class="tracking-page">
     <div class="container">
       <RouterLink to="/orders" class="back-link">
-        <ChevronLeft :size="18" /> My Orders
+        <ChevronLeft :size="18" /> Mis Pedidos
       </RouterLink>
 
       <div v-if="orders.loading && !orders.currentOrder" class="loading-state">
         <div class="spinner" style="width:48px; height:48px; border-width: 5px;"></div>
-        <p>Loading your order...</p>
+        <p>Cargando tu pedido...</p>
       </div>
 
       <div v-else-if="orders.currentOrder" class="tracking-layout">
@@ -18,7 +18,7 @@
             <span class="order-num">#{{ orders.currentOrder.id }}</span>
           </div>
           <div class="order-type-badge">
-            <span>{{ orders.currentOrder.order_type === 'delivery' ? '🚚 Delivery' : '🏪 Pickup' }}</span>
+            <span>{{ orders.currentOrder.order_type === 'delivery' ? '🚚 Entrega' : '🏪 Recogida' }}</span>
           </div>
           <div :class="`badge badge-${getStatusBadge(orders.currentOrder.status_id)}`">
             {{ getStatusLabel(orders.currentOrder.status_id) }}
@@ -31,7 +31,7 @@
 
         <!-- Status Timeline -->
         <div class="timeline-card glass-card">
-          <h3>Order Progress</h3>
+          <h3>Seguimiento del Pedido</h3>
           <div class="timeline">
             <div
               v-for="(step, i) in timelineSteps"
@@ -49,7 +49,7 @@
               <div class="tl-content">
                 <span class="tl-title">{{ step.label }}</span>
                 <span class="tl-desc">{{ step.desc }}</span>
-                <span v-if="isCurrentStep(step.statusId, orders.currentOrder.status_id)" class="tl-current-badge">In Progress</span>
+                <span v-if="isCurrentStep(step.statusId, orders.currentOrder.status_id)" class="tl-current-badge">En Proceso</span>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
 
         <!-- Order items -->
         <div class="order-items-card glass-card">
-          <h3>Items Ordered</h3>
+          <h3>Artículos Pedidos</h3>
           <div class="order-items-list">
             <div v-for="item in orders.currentOrder.order_menus" :key="item.id" class="oi-row">
               <span class="oi-name">{{ item.name }} <span class="oi-qty">×{{ item.quantity }}</span></span>
@@ -70,7 +70,7 @@
       <div v-else class="empty-state">
         <div class="empty-icon">📦</div>
         <h3>Order not found</h3>
-        <RouterLink to="/orders" class="btn btn-primary">View All Orders</RouterLink>
+        <RouterLink to="/orders" class="btn btn-primary">Ver Mis Pedidos</RouterLink>
       </div>
     </div>
   </div>
@@ -79,18 +79,18 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { ChevronLeft } from 'lucide-vue-next'
+import { ChevronLeft } from '@lucide/vue'
 import { useOrdersStore, ORDER_STATUSES } from '@/stores/orders'
 
 const route = useRoute()
 const orders = useOrdersStore()
 
 const timelineSteps = [
-  { statusId: 1, icon: '📋', label: 'Order Placed',    desc: 'We received your order' },
-  { statusId: 2, icon: '✅', label: 'Confirmed',        desc: 'Restaurant confirmed your order' },
-  { statusId: 3, icon: '👨‍🍳', label: 'Preparing',       desc: 'Your food is being prepared' },
-  { statusId: 4, icon: '🚚', label: 'On the Way',       desc: 'Driver is heading to you' },
-  { statusId: 5, icon: '🎉', label: 'Delivered',        desc: 'Enjoy your meal!' },
+  { statusId: 1, icon: '📋', label: 'Pedido Realizado',    desc: 'Recibimos tu pedido' },
+  { statusId: 2, icon: '✅', label: 'Confirmado',        desc: 'El restaurante confirmó tu pedido' },
+  { statusId: 3, icon: '👨‍🍳', label: 'Preparando',       desc: 'Estamos preparando tu comida' },
+  { statusId: 4, icon: '🚚', label: 'En Camino',          desc: 'El repartidor va hacia ti' },
+  { statusId: 5, icon: '🎉', label: 'Entregado',          desc: '¡Buen provecho!' },
 ]
 
 function getStatusLabel(id: number) {

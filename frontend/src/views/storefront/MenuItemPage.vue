@@ -2,7 +2,7 @@
   <div class="item-page">
     <div class="container">
       <RouterLink to="/menu" class="back-link">
-        <ChevronLeft :size="18" /> Back to Menu
+        <ChevronLeft :size="18" /> Volver al Menú
       </RouterLink>
 
       <div v-if="loading" class="item-detail-skeleton">
@@ -20,8 +20,8 @@
         <div class="item-visual glass-card">
           <div class="item-emoji">{{ getEmoji(item.menu_name) }}</div>
           <div class="item-tags">
-            <span class="badge badge-primary" v-if="Number(item.menu_price) < 15">Value Pick</span>
-            <span class="badge badge-success">Available</span>
+            <span class="badge badge-primary" v-if="Number(item.menu_price) < 15">Oferta</span>
+            <span class="badge badge-success">Disponible</span>
             <span class="badge badge-warning" v-if="Number(item.menu_price) > 40">Premium</span>
           </div>
         </div>
@@ -34,23 +34,23 @@
               <h1>{{ item.menu_name }}</h1>
             </div>
             <div class="item-price-block">
-              <span class="price-label">Price</span>
+              <span class="price-label">Precio</span>
               <span class="price-value">${{ Number(item.menu_price).toFixed(2) }}</span>
             </div>
           </div>
 
-          <p class="item-description">{{ item.menu_description || 'A masterful dish crafted with the finest seasonal ingredients by our award-winning culinary team. Perfect for any occasion.' }}</p>
+          <p class="item-description">{{ item.menu_description || 'Un plato magistral elaborado con los ingredientes de temporada más selectos por nuestro galardonado equipo culinario. Perfecto para cualquier ocasión.' }}</p>
 
           <div class="item-details-grid">
             <div class="detail-card glass-card">⏱️ <span>20–30 min prep</span></div>
             <div class="detail-card glass-card">🔥 <span>~650 cal</span></div>
-            <div class="detail-card glass-card">🌿 <span>Fresh ingredients</span></div>
-            <div class="detail-card glass-card">⭐ <span>4.8 rating</span></div>
+            <div class="detail-card glass-card">🌿 <span>Ingredientes frescos</span></div>
+            <div class="detail-card glass-card">⭐ <span>4.8 valoración</span></div>
           </div>
 
           <!-- Quantity -->
           <div class="quantity-section">
-            <label class="sidebar-title">Quantity</label>
+            <label class="sidebar-title">Cantidad</label>
             <div class="qty-control">
               <button class="qty-btn" @click="qty = Math.max(1, qty - 1)" id="qty-minus">
                 <Minus :size="16" />
@@ -64,15 +64,15 @@
 
           <!-- Notes -->
           <div class="input-group">
-            <label class="input-label">Special Instructions (optional)</label>
-            <textarea v-model="notes" class="input" rows="3" placeholder="Allergies, preferences..."></textarea>
+            <label class="input-label">Instrucciones especiales (opcional)</label>
+            <textarea v-model="notes" class="input" rows="3" placeholder="Alergias, preferencias..."></textarea>
           </div>
 
           <!-- CTA -->
           <div class="item-cta">
             <button class="btn btn-primary btn-lg w-full" @click="handleAddToCart" id="add-to-cart-btn">
               <ShoppingCart :size="18" />
-              Add {{ qty }} to Cart — ${{ (Number(item.menu_price) * qty).toFixed(2) }}
+              Agregar {{ qty }} al carrito — ${{ (Number(item.menu_price) * qty).toFixed(2) }}
             </button>
           </div>
         </div>
@@ -80,8 +80,8 @@
 
       <div v-else class="empty-state">
         <div class="empty-icon">😕</div>
-        <h3>Item not found</h3>
-        <RouterLink to="/menu" class="btn btn-primary">Browse Menu</RouterLink>
+        <h3>Artículo no encontrado</h3>
+        <RouterLink to="/menu" class="btn btn-primary">Explorar Menú</RouterLink>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
-import { ChevronLeft, ShoppingCart, Plus, Minus } from 'lucide-vue-next'
+import { ChevronLeft, ShoppingCart, Plus, Minus } from '@lucide/vue'
 import { useMenuStore } from '@/stores/menu'
 import { useCartStore } from '@/stores/cart'
 import { menuApi } from '@/services/api'

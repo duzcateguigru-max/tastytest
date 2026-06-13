@@ -4,48 +4,48 @@
     <div class="auth-card glass-card">
       <div class="auth-header">
         <RouterLink to="/" class="auth-logo">🍽️ FlavorHaven</RouterLink>
-        <h2>Create Account</h2>
-        <p>Join us for a delicious experience</p>
+        <h2>Crear Cuenta</h2>
+        <p>Únete para una experiencia deliciosa</p>
       </div>
       <form @submit.prevent="handleRegister" class="auth-form" novalidate>
         <div class="form-grid">
           <div class="input-group">
-            <label class="input-label">First Name</label>
-            <input v-model="form.first_name" class="input" placeholder="John" id="reg-fname" />
+            <label class="input-label">Nombre</label>
+            <input v-model="form.first_name" class="input" placeholder="Juan" id="reg-fname" />
           </div>
           <div class="input-group">
-            <label class="input-label">Last Name</label>
-            <input v-model="form.last_name" class="input" placeholder="Doe" id="reg-lname" />
+            <label class="input-label">Apellido</label>
+            <input v-model="form.last_name" class="input" placeholder="Pérez" id="reg-lname" />
           </div>
         </div>
         <div class="input-group">
-          <label class="input-label">Email</label>
-          <input v-model="form.email" type="email" class="input" :class="{ error: errors.email }" placeholder="you@example.com" id="reg-email" />
+          <label class="input-label">Correo Electrónico</label>
+          <input v-model="form.email" type="email" class="input" :class="{ error: errors.email }" placeholder="tu@ejemplo.com" id="reg-email" />
           <span v-if="errors.email" class="input-error">{{ errors.email }}</span>
         </div>
         <div class="input-group">
-          <label class="input-label">Phone</label>
+          <label class="input-label">Teléfono</label>
           <input v-model="form.telephone" type="tel" class="input" placeholder="+1 (555) 000-0000" id="reg-phone" />
         </div>
         <div class="input-group">
-          <label class="input-label">Password</label>
-          <input v-model="form.password" type="password" class="input" :class="{ error: errors.password }" placeholder="At least 8 characters" id="reg-pass" autocomplete="new-password" />
+          <label class="input-label">Contraseña</label>
+          <input v-model="form.password" type="password" class="input" :class="{ error: errors.password }" placeholder="Mínimo 8 caracteres" id="reg-pass" autocomplete="new-password" />
           <span v-if="errors.password" class="input-error">{{ errors.password }}</span>
         </div>
         <div class="input-group">
-          <label class="input-label">Confirm Password</label>
-          <input v-model="form.password_confirmation" type="password" class="input" :class="{ error: errors.confirm }" placeholder="Repeat password" id="reg-pass-confirm" />
+          <label class="input-label">Confirmar Contraseña</label>
+          <input v-model="form.password_confirmation" type="password" class="input" :class="{ error: errors.confirm }" placeholder="Repetir contraseña" id="reg-pass-confirm" />
           <span v-if="errors.confirm" class="input-error">{{ errors.confirm }}</span>
         </div>
         <button type="submit" class="btn btn-primary btn-lg w-full" :disabled="loading" id="register-submit-btn">
           <span v-if="loading" class="spinner"></span>
-          <span v-else>Create Account</span>
+          <span v-else>Crear Cuenta</span>
         </button>
         <span v-if="serverError" class="server-error">{{ serverError }}</span>
       </form>
       <div class="auth-footer">
-        <span>Already have an account?</span>
-        <RouterLink to="/login" class="text-primary">Sign in →</RouterLink>
+        <span>¿Ya tienes cuenta?</span>
+        <RouterLink to="/login" class="text-primary">Inicia sesión →</RouterLink>
       </div>
     </div>
   </div>

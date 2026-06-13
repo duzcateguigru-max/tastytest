@@ -2,27 +2,27 @@
   <div class="reviews-page">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">What Our Guests Say</span>
-        <h1>Reviews & <span class="text-gradient">Ratings</span></h1>
-        <p>Real experiences from our valued guests.</p>
+        <span class="eyebrow">Lo Que Dicen Nuestros Clientes</span>
+        <h1>Opiniones y <span class="text-gradient">Valoraciones</span></h1>
+        <p>Experiencias reales de nuestros estimados clientes.</p>
       </div>
 
       <!-- Write review -->
       <div class="write-review glass-card" v-if="auth.isLoggedIn">
-        <h3>Leave a Review</h3>
+        <h3>Dejar una Reseña</h3>
         <div class="star-select">
           <button v-for="n in 5" :key="n" class="star-btn" :class="{ active: form.rating >= n }" @click="form.rating = n" :id="`star-${n}`">⭐</button>
         </div>
-        <textarea v-model="form.review_text" class="input" rows="4" placeholder="Share your experience..."></textarea>
+        <textarea v-model="form.review_text" class="input" rows="4" placeholder="Comparte tu experiencia..."></textarea>
         <button class="btn btn-primary" @click="submitReview" :disabled="loading" id="submit-review-btn">
           <span v-if="loading" class="spinner"></span>
-          <span v-else>Submit Review</span>
+          <span v-else>Enviar Reseña</span>
         </button>
       </div>
       <div class="login-prompt glass-card" v-else>
         <span>🌟</span>
-        <p>Sign in to leave a review</p>
-        <RouterLink to="/login" class="btn btn-outline btn-sm">Sign In</RouterLink>
+        <p>Inicia sesión para dejar una reseña</p>
+        <RouterLink to="/login" class="btn btn-outline btn-sm">Iniciar Sesión</RouterLink>
       </div>
 
       <!-- Reviews list -->
@@ -50,8 +50,8 @@
 
       <div v-else class="empty-state">
         <div class="empty-icon">⭐</div>
-        <h3>No reviews yet</h3>
-        <p>Be the first to share your experience!</p>
+        <h3>No hay reseñas todavía</h3>
+        <p>¡Sé el primero en compartir tu experiencia!</p>
       </div>
     </div>
   </div>
@@ -79,15 +79,15 @@ async function fetchReviews() {
 }
 
 async function submitReview() {
-  if (!form.value.review_text.trim()) { toast.error('Please write a review'); return }
+  if (!form.value.review_text.trim()) { toast.error('Por favor escribe una reseña'); return }
   loading.value = true
   try {
     await reviewsApi.create({ ...form.value })
-    toast.success('Review submitted! Thank you.')
+    toast.success('¡Reseña enviada! Gracias.')
     form.value = { rating: 5, review_text: '' }
     await fetchReviews()
   } catch (e: any) {
-    toast.error(e?.response?.data?.message ?? 'Failed to submit review')
+    toast.error(e?.response?.data?.message ?? 'Error al enviar la reseña')
   } finally { loading.value = false }
 }
 

@@ -9,10 +9,10 @@
 
       <!-- Desktop nav -->
       <nav class="navbar-nav">
-        <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }">Home</RouterLink>
-        <RouterLink to="/menu" class="nav-link">Menu</RouterLink>
-        <RouterLink to="/reservations" class="nav-link">Reservations</RouterLink>
-        <RouterLink to="/reviews" class="nav-link">Reviews</RouterLink>
+        <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }">Inicio</RouterLink>
+        <RouterLink to="/menu" class="nav-link">Menú</RouterLink>
+        <RouterLink to="/reservations" class="nav-link">Reservas</RouterLink>
+        <RouterLink to="/reviews" class="nav-link">Reseñas</RouterLink>
       </nav>
 
       <!-- Actions -->
@@ -34,29 +34,29 @@
             <Transition name="fade">
               <div class="user-dropdown" v-if="showUserMenu">
                 <RouterLink to="/orders" class="dropdown-item" @click="showUserMenu = false">
-                  <Package :size="15" /> My Orders
+                  <Package :size="15" /> Mis Pedidos
                 </RouterLink>
                 <RouterLink to="/profile" class="dropdown-item" @click="showUserMenu = false">
-                  <User :size="15" /> Profile
+                  <User :size="15" /> Mi Perfil
                 </RouterLink>
                 <RouterLink to="/admin" class="dropdown-item" @click="showUserMenu = false">
-                  <Settings :size="15" /> Admin Panel
+                  <Settings :size="15" /> Panel Admin
                 </RouterLink>
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item danger" @click="handleLogout">
-                  <LogOut :size="15" /> Sign Out
+                  <LogOut :size="15" /> Cerrar Sesión
                 </button>
               </div>
             </Transition>
           </div>
         </template>
         <template v-else>
-          <RouterLink to="/login" class="btn btn-outline btn-sm">Sign In</RouterLink>
-          <RouterLink to="/register" class="btn btn-primary btn-sm">Join Us</RouterLink>
+          <RouterLink to="/login" class="btn btn-outline btn-sm">Iniciar Sesión</RouterLink>
+          <RouterLink to="/register" class="btn btn-primary btn-sm">Únete</RouterLink>
         </template>
 
         <!-- Mobile hamburger -->
-        <button class="hamburger" @click="mobileOpen = !mobileOpen" aria-label="Toggle menu">
+        <button class="hamburger" @click="mobileOpen = !mobileOpen" aria-label="Abrir menú">
           <Menu v-if="!mobileOpen" :size="22" />
           <X v-else :size="22" />
         </button>
@@ -66,20 +66,20 @@
     <!-- Mobile menu -->
     <Transition name="fade">
       <div class="mobile-menu" v-if="mobileOpen">
-        <RouterLink to="/"            class="mobile-link" @click="mobileOpen = false">Home</RouterLink>
-        <RouterLink to="/menu"        class="mobile-link" @click="mobileOpen = false">Menu</RouterLink>
-        <RouterLink to="/reservations" class="mobile-link" @click="mobileOpen = false">Reservations</RouterLink>
-        <RouterLink to="/reviews"     class="mobile-link" @click="mobileOpen = false">Reviews</RouterLink>
-        <RouterLink to="/cart"        class="mobile-link" @click="mobileOpen = false">Cart ({{ cart.itemCount }})</RouterLink>
+        <RouterLink to="/"            class="mobile-link" @click="mobileOpen = false">Inicio</RouterLink>
+        <RouterLink to="/menu"        class="mobile-link" @click="mobileOpen = false">Menú</RouterLink>
+        <RouterLink to="/reservations" class="mobile-link" @click="mobileOpen = false">Reservas</RouterLink>
+        <RouterLink to="/reviews"     class="mobile-link" @click="mobileOpen = false">Reseñas</RouterLink>
+        <RouterLink to="/cart"        class="mobile-link" @click="mobileOpen = false">Carrito ({{ cart.itemCount }})</RouterLink>
         <template v-if="auth.isLoggedIn">
-          <RouterLink to="/orders"  class="mobile-link" @click="mobileOpen = false">My Orders</RouterLink>
-          <RouterLink to="/profile" class="mobile-link" @click="mobileOpen = false">Profile</RouterLink>
+          <RouterLink to="/orders"  class="mobile-link" @click="mobileOpen = false">Mis Pedidos</RouterLink>
+          <RouterLink to="/profile" class="mobile-link" @click="mobileOpen = false">Mi Perfil</RouterLink>
           <RouterLink to="/admin"   class="mobile-link" @click="mobileOpen = false">Admin</RouterLink>
-          <button class="mobile-link danger" @click="handleLogout">Sign Out</button>
+          <button class="mobile-link danger" @click="handleLogout">Cerrar Sesión</button>
         </template>
         <template v-else>
-          <RouterLink to="/login"    class="mobile-link" @click="mobileOpen = false">Sign In</RouterLink>
-          <RouterLink to="/register" class="mobile-link" @click="mobileOpen = false">Join Us</RouterLink>
+          <RouterLink to="/login"    class="mobile-link" @click="mobileOpen = false">Iniciar Sesión</RouterLink>
+          <RouterLink to="/register" class="mobile-link" @click="mobileOpen = false">Únete</RouterLink>
         </template>
       </div>
     </Transition>
@@ -89,7 +89,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
-import { ShoppingCart, Menu, X, User, LogOut, Settings, Package } from 'lucide-vue-next'
+import { ShoppingCart, Menu, X, User, LogOut, Settings, Package } from '@lucide/vue'
 import { useCartStore } from '@/stores/cart'
 import { useAuthStore } from '@/stores/auth'
 

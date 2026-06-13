@@ -8,7 +8,7 @@
             <span class="logo-emoji">🍽️</span>
             <span>FlavorHaven</span>
           </div>
-          <p>Experience the finest dining, delivered to your door or enjoyed at our tables. Quality you can taste.</p>
+          <p>Vive la mejor gastronomía, entregada a tu puerta o disfrutada en nuestras mesas. Calidad que se siente en cada bocado.</p>
           <div class="social-links">
             <a href="#" class="social-btn" aria-label="Facebook">
               <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
@@ -24,44 +24,44 @@
 
         <!-- Quick links -->
         <div class="footer-col">
-          <h4>Explore</h4>
+          <h4>Explorar</h4>
           <ul>
-            <li><RouterLink to="/menu">Our Menu</RouterLink></li>
-            <li><RouterLink to="/reservations">Reserve a Table</RouterLink></li>
-            <li><RouterLink to="/reviews">Reviews</RouterLink></li>
-            <li><RouterLink to="/orders">Track Order</RouterLink></li>
+            <li><RouterLink to="/menu">Nuestro Menú</RouterLink></li>
+            <li><RouterLink to="/reservations">Reservar Mesa</RouterLink></li>
+            <li><RouterLink to="/reviews">Reseñas</RouterLink></li>
+            <li><RouterLink to="/orders">Rastrear Pedido</RouterLink></li>
           </ul>
         </div>
 
         <!-- Account -->
         <div class="footer-col">
-          <h4>Account</h4>
+          <h4>Mi Cuenta</h4>
           <ul>
-            <li><RouterLink to="/login">Sign In</RouterLink></li>
-            <li><RouterLink to="/register">Create Account</RouterLink></li>
-            <li><RouterLink to="/profile">My Profile</RouterLink></li>
-            <li><RouterLink to="/orders">Order History</RouterLink></li>
+            <li><RouterLink to="/login">Iniciar Sesión</RouterLink></li>
+            <li><RouterLink to="/register">Crear Cuenta</RouterLink></li>
+            <li><RouterLink to="/profile">Mi Perfil</RouterLink></li>
+            <li><RouterLink to="/orders">Historial de Pedidos</RouterLink></li>
           </ul>
         </div>
 
         <!-- Contact -->
         <div class="footer-col">
-          <h4>Visit Us</h4>
+          <h4>Visítanos</h4>
           <ul>
-            <li class="contact-item">📍 123 Gourmet Ave, Flavor City</li>
+            <li class="contact-item">📍 123 Av. Gourmet, Ciudad Sabor</li>
             <li class="contact-item">📞 +1 (555) 123-4567</li>
-            <li class="contact-item">✉️ hello@flavorhaven.com</li>
-            <li class="contact-item">🕐 Mon–Sun: 11am – 10pm</li>
+            <li class="contact-item">✉️ hola@flavorhaven.com</li>
+            <li class="contact-item">🕐 Lun–Dom: 11am – 10pm</li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>© {{ new Date().getFullYear() }} FlavorHaven. All rights reserved.</p>
+        <p>© {{ new Date().getFullYear() }} FlavorHaven. Todos los derechos reservados.</p>
         <div class="footer-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookie Policy</a>
+          <a href="#">Política de Privacidad</a>
+          <a href="#">Términos de Servicio</a>
+          <a href="#">Política de Cookies</a>
         </div>
       </div>
     </div>

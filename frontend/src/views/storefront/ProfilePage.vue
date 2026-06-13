@@ -1,31 +1,31 @@
 <template>
   <div class="profile-page">
     <div class="container" style="max-width: 700px;">
-      <h1>My <span class="text-gradient">Profile</span></h1>
+      <h1>Mi <span class="text-gradient">Perfil</span></h1>
       <div class="profile-card glass-card">
         <div class="profile-avatar">{{ auth.fullName.charAt(0) || 'U' }}</div>
         <div class="profile-name">{{ auth.fullName || 'User' }}</div>
         <div class="profile-email">{{ auth.user?.email }}</div>
       </div>
       <div class="profile-form glass-card">
-        <h3>Account Details</h3>
+        <h3>Datos de la Cuenta</h3>
         <div class="form-grid">
           <div class="input-group">
-            <label class="input-label">First Name</label>
+            <label class="input-label">Nombre</label>
             <input v-model="form.first_name" class="input" />
           </div>
           <div class="input-group">
-            <label class="input-label">Last Name</label>
+            <label class="input-label">Apellido</label>
             <input v-model="form.last_name" class="input" />
           </div>
         </div>
         <div class="input-group">
-          <label class="input-label">Phone</label>
+          <label class="input-label">Teléfono</label>
           <input v-model="form.telephone" class="input" type="tel" />
         </div>
         <button class="btn btn-primary" @click="save" :disabled="saving" id="save-profile-btn">
           <span v-if="saving" class="spinner"></span>
-          <span v-else>Save Changes</span>
+          <span v-else>Guardar Cambios</span>
         </button>
       </div>
     </div>
@@ -53,8 +53,8 @@ async function save() {
   try {
     await customersApi.update(auth.user.id, form.value)
     await auth.fetchMe()
-    toast.success('Profile updated!')
-  } catch { toast.error('Failed to update profile') }
+    toast.success('¡Perfil actualizado!')
+  } catch { toast.error('Error al actualizar el perfil') }
   finally { saving.value = false }
 }
 </script>

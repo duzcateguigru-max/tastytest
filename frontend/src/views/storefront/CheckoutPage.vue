@@ -2,9 +2,9 @@
   <div class="checkout-page">
     <div class="container">
       <RouterLink to="/cart" class="back-link">
-        <ChevronLeft :size="18" /> Back to Cart
+        <ChevronLeft :size="18" /> Volver al Carrito
       </RouterLink>
-      <h1>Checkout</h1>
+      <h1>Pago</h1>
 
       <div class="checkout-layout">
         <!-- ── Form ─────────────────────────── -->
@@ -19,72 +19,62 @@
 
           <!-- Step 1: Order type -->
           <div v-if="currentStep === 0" class="step-content glass-card">
-            <h3>Order Type</h3>
+            <h3>Tipo de Pedido</h3>
             <div class="order-type-cards">
-              <button
-                class="type-card"
-                :class="{ active: form.order_type === 'delivery' }"
-                @click="form.order_type = 'delivery'"
-                id="type-delivery"
-              >
+              <button class="type-card" :class="{ active: form.order_type === 'delivery' }" @click="form.order_type = 'delivery'" id="type-delivery">
                 <span class="type-icon">🚚</span>
-                <span class="type-label">Delivery</span>
+                <span class="type-label">Entrega a Domicilio</span>
                 <span class="type-desc">30–45 min</span>
               </button>
-              <button
-                class="type-card"
-                :class="{ active: form.order_type === 'collection' }"
-                @click="form.order_type = 'collection'"
-                id="type-pickup"
-              >
+              <button class="type-card" :class="{ active: form.order_type === 'collection' }" @click="form.order_type = 'collection'" id="type-pickup">
                 <span class="type-icon">🏪</span>
-                <span class="type-label">Pickup</span>
+                <span class="type-label">Recoger en Local</span>
                 <span class="type-desc">15–20 min</span>
               </button>
             </div>
 
             <div v-if="form.order_type === 'delivery'" class="input-group">
-              <label class="input-label">Delivery Address</label>
-              <input v-model="form.address" class="input" placeholder="123 Main St, City" id="delivery-address" />
-              <input v-model="form.city" class="input" placeholder="City" style="margin-top: var(--space-2);" />
-              <input v-model="form.postcode" class="input" placeholder="ZIP / Postal Code" style="margin-top: var(--space-2);" />
+              <label class="input-label">Dirección de Entrega</label>
+              <input v-model="form.address" class="input" placeholder="Av. Principal 123, Ciudad" id="delivery-address" />
+              <input v-model="form.city" class="input" placeholder="Ciudad" style="margin-top: var(--space-2);" />
+              <input v-model="form.postcode" class="input" placeholder="Código Postal" style="margin-top: var(--space-2);" />
             </div>
 
             <button class="btn btn-primary btn-lg w-full" @click="currentStep = 1" id="next-step-1">
-              Continue →
+              Continuar →
             </button>
           </div>
 
           <!-- Step 2: Contact -->
           <div v-if="currentStep === 1" class="step-content glass-card">
-            <h3>Contact Details</h3>
+            <h3>Datos de Contacto</h3>
             <div class="form-grid">
               <div class="input-group">
-                <label class="input-label">First Name</label>
-                <input v-model="form.first_name" class="input" placeholder="John" id="first-name" />
+                <label class="input-label">Nombre</label>
+                <input v-model="form.first_name" class="input" placeholder="Juan" id="first-name" />
               </div>
               <div class="input-group">
-                <label class="input-label">Last Name</label>
-                <input v-model="form.last_name" class="input" placeholder="Doe" id="last-name" />
+                <label class="input-label">Apellido</label>
+                <input v-model="form.last_name" class="input" placeholder="Pérez" id="last-name" />
               </div>
             </div>
             <div class="input-group">
-              <label class="input-label">Phone Number</label>
+              <label class="input-label">Número de Teléfono</label>
               <input v-model="form.telephone" class="input" type="tel" placeholder="+1 (555) 000-0000" id="phone" />
             </div>
             <div class="input-group">
-              <label class="input-label">Special Instructions</label>
-              <textarea v-model="form.comment" class="input" rows="3" placeholder="Allergies, access notes..."></textarea>
+              <label class="input-label">Instrucciones Especiales</label>
+              <textarea v-model="form.comment" class="input" rows="3" placeholder="Alergias, instrucciones de acceso..."></textarea>
             </div>
             <div class="step-buttons">
-              <button class="btn btn-ghost" @click="currentStep = 0">← Back</button>
-              <button class="btn btn-primary" @click="currentStep = 2" id="next-step-2">Continue →</button>
+              <button class="btn btn-ghost" @click="currentStep = 0">← Volver</button>
+              <button class="btn btn-primary" @click="currentStep = 2" id="next-step-2">Continuar →</button>
             </div>
           </div>
 
           <!-- Step 3: Payment & Review -->
           <div v-if="currentStep === 2" class="step-content glass-card">
-            <h3>Payment Method</h3>
+            <h3>Método de Pago</h3>
             <div class="payment-options">
               <button
                 v-for="p in paymentMethods"
@@ -99,10 +89,10 @@
               </button>
             </div>
             <div class="step-buttons">
-              <button class="btn btn-ghost" @click="currentStep = 1">← Back</button>
+              <button class="btn btn-ghost" @click="currentStep = 1">← Volver</button>
               <button class="btn btn-primary btn-lg" @click="placeOrder" :disabled="orders.loading" id="place-order-btn">
                 <span v-if="orders.loading" class="spinner"></span>
-                <span v-else>🎉 Place Order — ${{ cart.total.toFixed(2) }}</span>
+                <span v-else>🎉 Realizar Pedido — ${{ cart.total.toFixed(2) }}</span>
               </button>
             </div>
           </div>
@@ -110,7 +100,7 @@
 
         <!-- ── Order summary ──────────────────── -->
         <div class="checkout-summary glass-card">
-          <h3>Order Summary</h3>
+          <h3>Resumen del Pedido</h3>
           <div class="order-items">
             <div v-for="item in cart.items" :key="item.menu_id" class="order-item">
               <span class="oi-name">{{ item.name }} ×{{ item.quantity }}</span>
@@ -120,11 +110,11 @@
           <div class="summary-divider"></div>
           <div class="summary-row"><span>Subtotal</span><span>${{ cart.subtotal.toFixed(2) }}</span></div>
           <div class="summary-row" v-if="cart.coupon" style="color: var(--color-accent);">
-            <span>Discount</span><span>–${{ cart.discount.toFixed(2) }}</span>
+            <span>Descuento</span><span>–${{ cart.discount.toFixed(2) }}</span>
           </div>
           <div class="summary-row">
-            <span>Delivery</span>
-            <span>{{ cart.deliveryFee === 0 ? 'FREE' : `$${cart.deliveryFee.toFixed(2)}` }}</span>
+            <span>Entrega</span>
+            <span>{{ cart.deliveryFee === 0 ? 'GRATIS' : `$${cart.deliveryFee.toFixed(2)}` }}</span>
           </div>
           <div class="summary-divider"></div>
           <div class="summary-row total"><span>Total</span><span>${{ cart.total.toFixed(2) }}</span></div>
@@ -137,7 +127,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-import { ChevronLeft } from 'lucide-vue-next'
+import { ChevronLeft } from '@lucide/vue'
 import { useCartStore } from '@/stores/cart'
 import { useOrdersStore } from '@/stores/orders'
 import { useToast } from 'vue-toastification'
@@ -148,7 +138,7 @@ const router = useRouter()
 const toast = useToast()
 
 const currentStep = ref(0)
-const checkoutSteps = ['Order Type', 'Contact', 'Payment']
+const checkoutSteps = ['Tipo de Pedido', 'Contacto', 'Pago']
 
 const form = ref({
   order_type: 'delivery' as 'delivery' | 'collection',
@@ -158,18 +148,18 @@ const form = ref({
 })
 
 const paymentMethods = [
-  { id: 'cash',   icon: '💵', label: 'Cash on Delivery' },
-  { id: 'card',   icon: '💳', label: 'Credit / Debit Card' },
+  { id: 'cash',   icon: '💵', label: 'Efectivo al Entregar' },
+  { id: 'card',   icon: '💳', label: 'Tarjeta de Crédito / Débito' },
   { id: 'paypal', icon: '🅿️', label: 'PayPal' },
 ]
 
 async function placeOrder() {
   try {
     const order = await orders.placeOrder({ ...form.value })
-    toast.success('Order placed successfully! 🎉')
+    toast.success('¡Pedido realizado con éxito! 🎉')
     router.push(`/orders/${order.id}`)
   } catch (e: any) {
-    toast.error(e?.response?.data?.message ?? 'Failed to place order')
+    toast.error(e?.response?.data?.message ?? 'Error al realizar el pedido')
   }
 }
 </script>

@@ -43,7 +43,7 @@ export const useCartStore = defineStore('cart', () => {
     } else {
       items.value.push({ ...item, quantity: qty })
     }
-    toast.success(`${item.name} added to cart!`)
+    toast.success(`¡${item.name} agregado al carrito!`)
   }
 
   function removeItem(menuId: number) {
@@ -68,9 +68,9 @@ export const useCartStore = defineStore('cart', () => {
     try {
       const res = await couponsApi.apply(code)
       coupon.value = res.data
-      toast.success('Coupon applied!')
+      toast.success('¡Cupón aplicado!')
     } catch {
-      toast.error('Invalid or expired coupon')
+      toast.error('Cupón inválido o expirado')
     } finally {
       loading.value = false
     }

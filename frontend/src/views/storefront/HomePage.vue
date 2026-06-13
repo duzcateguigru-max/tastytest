@@ -10,34 +10,34 @@
       </div>
       <div class="container hero-content">
         <div class="hero-text">
-          <span class="hero-eyebrow">✦ Premium Dining Experience</span>
+          <span class="hero-eyebrow">✦ Experiencia Gastronómica Premium</span>
           <h1>
-            Crafted with<br />
-            <span class="text-gradient">Passion & Flavor</span>
+            Elaborado con<br />
+            <span class="text-gradient">Pasión y Sabor</span>
           </h1>
-          <p>Discover exceptional cuisine made from the finest ingredients. Order online for delivery or reserve your table for an unforgettable evening.</p>
+          <p>Descubre platos artesanales elaborados con los mejores ingredientes. Desde hamburguesas gourmet hasta langosta exquisita — cada bocado cuenta una historia.</p>
           <div class="hero-actions">
             <RouterLink to="/menu" class="btn btn-primary btn-lg" id="hero-order-btn">
-              <UtensilsCrossed :size="18" /> Order Now
+              <UtensilsCrossed :size="18" /> Pedir Ahora
             </RouterLink>
             <RouterLink to="/reservations" class="btn btn-ghost btn-lg" id="hero-reserve-btn">
-              <CalendarDays :size="18" /> Book a Table
+              <CalendarDays :size="18" /> Reservar Mesa
             </RouterLink>
           </div>
           <div class="hero-stats">
             <div class="stat">
               <span class="stat-value">500+</span>
-              <span class="stat-label">Menu Items</span>
+              <span class="stat-label">Platos en el Menú</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
               <span class="stat-value">4.9★</span>
-              <span class="stat-label">Rating</span>
+              <span class="stat-label">Calificación</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
               <span class="stat-value">20k+</span>
-              <span class="stat-label">Happy Guests</span>
+              <span class="stat-label">Clientes Felices</span>
             </div>
           </div>
         </div>
@@ -52,14 +52,14 @@
           <div class="hero-dish-card card-2 animate-float" style="animation-delay: 0.5s">
             <div class="dish-emoji">🦞</div>
             <div class="dish-info">
-              <span class="dish-name">Lobster Bisque</span>
+              <span class="dish-name">Bisque de Langosta</span>
               <span class="dish-price">$34</span>
             </div>
           </div>
           <div class="hero-dish-card card-3 animate-float" style="animation-delay: 1s">
             <div class="dish-emoji">🍰</div>
             <div class="dish-info">
-              <span class="dish-name">Lemon Tart</span>
+              <span class="dish-name">Tarta de Limón</span>
               <span class="dish-price">$14</span>
             </div>
           </div>
@@ -87,9 +87,9 @@
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <span class="eyebrow">Our Specialties</span>
-          <h2>Featured <span class="text-gradient">Dishes</span></h2>
-          <p>Hand-picked favorites crafted by our award-winning chefs using seasonal ingredients.</p>
+          <span class="eyebrow">Nuestras Especialidades</span>
+          <h2>Saborea la <span class="text-gradient">Perfección</span></h2>
+          <p>Favoritos seleccionados a mano, elaborados por nuestros chefs premiados utilizando ingredientes de temporada.</p>
         </div>
 
         <div v-if="menuStore.loading" class="menu-grid">
@@ -116,11 +116,11 @@
             </div>
             <div class="menu-card-body">
               <h4 class="menu-card-name">{{ item.menu_name }}</h4>
-              <p class="menu-card-desc">{{ item.menu_description || 'A delicious creation from our kitchen.' }}</p>
+              <p class="menu-card-desc">{{ item.menu_description || 'Una creación deliciosa de nuestra cocina.' }}</p>
               <div class="menu-card-footer">
                 <span class="menu-price">${{ Number(item.menu_price).toFixed(2) }}</span>
                 <button class="btn btn-primary btn-sm" @click.stop="addToCart(item)" :id="`add-cart-${item.id}`">
-                  <Plus :size="14" /> Add
+                  <Plus :size="14" /> Agregar
                 </button>
               </div>
             </div>
@@ -128,7 +128,7 @@
         </div>
 
         <div class="text-center" style="margin-top: var(--space-10);">
-          <RouterLink to="/menu" class="btn btn-outline btn-lg">View Full Menu →</RouterLink>
+          <RouterLink to="/menu" class="btn btn-outline btn-lg">Ver Menú Completo →</RouterLink>
         </div>
       </div>
     </section>
@@ -137,8 +137,8 @@
     <section class="section how-section">
       <div class="container">
         <div class="section-header">
-          <span class="eyebrow">Simple & Fast</span>
-          <h2>How It <span class="text-gradient">Works</span></h2>
+          <span class="eyebrow">Restaurante Gourmet en Ciudad Sabor</span>
+          <h2>¿Cómo <span class="text-gradient">Funciona?</span></h2>
         </div>
         <div class="steps-row">
           <div class="step" v-for="(step, i) in steps" :key="i">
@@ -157,11 +157,11 @@
       <div class="container">
         <div class="cta-card glass-card">
           <div class="cta-content">
-            <span class="eyebrow" style="margin-bottom: var(--space-4);">Reserve Tonight</span>
-            <h2>Book Your <span class="text-gradient">Table</span></h2>
-            <p>Join us for an unforgettable dining experience. Special events, private dining, and celebrations welcome.</p>
+            <span class="eyebrow" style="margin-bottom: var(--space-4);">Experiencia Gastronómica</span>
+            <h2>Reserva Tu <span class="text-gradient">Mesa</span></h2>
+            <p>Disfruta de una velada especial. El ambiente perfecto para cada ocasión.</p>
             <RouterLink to="/reservations" class="btn btn-primary btn-lg" id="cta-reserve-btn">
-              <CalendarDays :size="18" /> Make a Reservation
+              <CalendarDays :size="18" /> Hacer una Reserva
             </RouterLink>
           </div>
           <div class="cta-decoration">
@@ -176,7 +176,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-import { UtensilsCrossed, CalendarDays, Plus } from 'lucide-vue-next'
+import { UtensilsCrossed, CalendarDays, Plus } from '@lucide/vue'
 import { useMenuStore } from '@/stores/menu'
 import { useCartStore } from '@/stores/cart'
 
@@ -187,16 +187,16 @@ const router = useRouter()
 const featuredItems = computed(() => menuStore.items.slice(0, 8))
 
 const features = [
-  { icon: '⚡', title: 'Fast Delivery', desc: '30-minute delivery guarantee' },
-  { icon: '👨‍🍳', title: 'Expert Chefs', desc: 'Award-winning culinary team' },
-  { icon: '🌿', title: 'Fresh Ingredients', desc: 'Locally sourced, daily fresh' },
-  { icon: '🔒', title: 'Secure Payment', desc: 'Encrypted & safe checkout' },
+  { icon: '⚡', title: 'Entrega Rápida', desc: 'Garantía de entrega en 30 minutos' },
+  { icon: '👨‍🍳', title: 'Chefs Expertos', desc: 'Equipo culinario premiado' },
+  { icon: '🌿', title: 'Ingredientes Frescos', desc: 'Origen local, frescos a diario' },
+  { icon: '🔒', title: 'Pago Seguro', desc: 'Pago cifrado y protegido' },
 ]
 
 const steps = [
-  { icon: '🍽️', title: 'Browse Menu', desc: 'Explore our curated selection of gourmet dishes' },
-  { icon: '🛒', title: 'Add to Cart', desc: 'Select items and customize your order' },
-  { icon: '🚀', title: 'Fast Delivery', desc: 'Receive your order fresh and hot' },
+  { icon: '🍽️', title: 'Explorar Menú', desc: 'Descubre nuestra selección de platos gourmet' },
+  { icon: '🛍️', title: 'Agregar al Carrito', desc: 'Selecciona tus platos y personaliza tu pedido' },
+  { icon: '🚀', title: 'Entrega Rápida', desc: 'Recibe tu pedido fresco y caliente' },
 ]
 
 function particleStyle(n: number) {

@@ -1,13 +1,13 @@
 <template>
   <div class="cart-page">
     <div class="container">
-      <h1>Your <span class="text-gradient">Cart</span></h1>
+      <h1>Tu <span class="text-gradient">Carrito</span></h1>
 
       <div v-if="cart.items.length === 0" class="empty-cart">
         <div class="empty-icon">🛒</div>
-        <h2>Your cart is empty</h2>
-        <p>Looks like you haven't added anything yet.</p>
-        <RouterLink to="/menu" class="btn btn-primary btn-lg" id="browse-menu-btn">Browse Menu</RouterLink>
+        <h2>Tu carrito está vacío</h2>
+        <p>Parece que aún no has agregado nada.</p>
+        <RouterLink to="/menu" class="btn btn-primary btn-lg" id="browse-menu-btn">Ver Menú</RouterLink>
       </div>
 
       <div v-else class="cart-layout">
@@ -44,39 +44,39 @@
                 v-model="couponCode"
                 type="text"
                 class="input"
-                placeholder="Enter coupon code"
+                placeholder="Ingresa tu cupón"
                 id="coupon-input"
               />
               <button class="btn btn-outline" @click="cart.applyCoupon(couponCode)" :disabled="cart.loading" id="apply-coupon-btn">
-                Apply
+                Aplicar
               </button>
             </div>
             <button v-if="cart.coupon" class="remove-coupon" @click="cart.removeCoupon()">
-              Remove coupon "{{ cart.coupon.code }}"
+              Quitar cupón "{{ cart.coupon.code }}"
             </button>
           </div>
         </div>
 
         <!-- ── Summary ────────────────── -->
         <div class="cart-summary glass-card">
-          <h3>Order Summary</h3>
+          <h3>Resumen del Pedido</h3>
           <div class="summary-rows">
             <div class="summary-row">
-              <span>Subtotal ({{ cart.itemCount }} items)</span>
+              <span>Subtotal ({{ cart.itemCount }} artículos)</span>
               <span>${{ cart.subtotal.toFixed(2) }}</span>
             </div>
             <div class="summary-row discount" v-if="cart.coupon">
-              <span>Discount ({{ cart.coupon.code }})</span>
+              <span>Descuento ({{ cart.coupon.code }})</span>
               <span>–${{ cart.discount.toFixed(2) }}</span>
             </div>
             <div class="summary-row">
-              <span>Delivery fee</span>
+              <span>Cargo de entrega</span>
               <span :class="{ free: cart.deliveryFee === 0 }">
                 {{ cart.deliveryFee === 0 ? 'FREE' : `$${cart.deliveryFee.toFixed(2)}` }}
               </span>
             </div>
             <div v-if="cart.deliveryFee > 0" class="free-delivery-hint">
-              Add ${{ (30 - cart.subtotal).toFixed(2) }} more for free delivery!
+              ¡Agrega ${{ (30 - cart.subtotal).toFixed(2) }} más para envío gratis!
             </div>
             <div class="summary-divider"></div>
             <div class="summary-row total">
@@ -86,15 +86,15 @@
           </div>
 
           <RouterLink to="/checkout" class="btn btn-primary btn-lg w-full" id="checkout-btn">
-            Proceed to Checkout →
+            Proceder al Pago →
           </RouterLink>
           <RouterLink to="/menu" class="btn btn-ghost btn-sm w-full" style="margin-top: var(--space-3);">
-            Continue Shopping
+            Seguir Comprando
           </RouterLink>
 
           <div class="security-badges">
-            <span>🔒 Secure Checkout</span>
-            <span>💳 All Cards Accepted</span>
+            <span>🔒 Pago Seguro</span>
+            <span>💳 Todas las Tarjetas Aceptadas</span>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { Plus, Minus, Trash2 } from 'lucide-vue-next'
+import { Plus, Minus, Trash2 } from '@lucide/vue'
 import { useCartStore } from '@/stores/cart'
 
 const cart = useCartStore()

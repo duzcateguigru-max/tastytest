@@ -2,21 +2,21 @@
   <div class="menu-page">
     <div class="container">
       <div class="menu-header">
-        <h1>Our <span class="text-gradient">Menu</span></h1>
-        <p>Explore our full selection — crafted with passion, served with love.</p>
+        <h1>Nuestro <span class="text-gradient">Menú</span></h1>
+        <p>Explora nuestra selección completa — creada con pasión, servida con amor.</p>
       </div>
 
       <div class="menu-layout">
         <!-- ── Sidebar ──────────────────────── -->
         <aside class="menu-sidebar">
           <div class="sidebar-section">
-            <h3 class="sidebar-title">Search</h3>
+            <h3 class="sidebar-title">Buscar</h3>
             <div class="search-box">
               <Search :size="16" class="search-icon" />
               <input
                 v-model="search"
                 type="text"
-                placeholder="Search dishes..."
+                placeholder="Buscar platos..."
                 class="input search-input"
                 id="menu-search"
               />
@@ -24,7 +24,7 @@
           </div>
 
           <div class="sidebar-section">
-            <h3 class="sidebar-title">Categories</h3>
+            <h3 class="sidebar-title">Categorías</h3>
             <div class="category-list">
               <button
                 class="category-btn"
@@ -32,7 +32,7 @@
                 @click="selectedCat = null"
                 id="cat-all"
               >
-                All Items
+                Todos los ítems
                 <span class="cat-count">{{ menuStore.items.length }}</span>
               </button>
               <button
@@ -50,21 +50,21 @@
           </div>
 
           <div class="sidebar-section">
-            <h3 class="sidebar-title">Price Range</h3>
+            <h3 class="sidebar-title">Rango de Precio</h3>
             <div class="price-range">
-              <input v-model.number="minPrice" type="number" class="input" placeholder="Min $" min="0" />
+              <input v-model.number="minPrice" type="number" class="input" placeholder="Mín $" min="0" />
               <span>–</span>
-              <input v-model.number="maxPrice" type="number" class="input" placeholder="Max $" min="0" />
+              <input v-model.number="maxPrice" type="number" class="input" placeholder="Máx $" min="0" />
             </div>
           </div>
 
           <div class="sidebar-section">
-            <h3 class="sidebar-title">Sort By</h3>
+            <h3 class="sidebar-title">Ordenar por</h3>
             <select v-model="sortBy" class="input" id="menu-sort">
-              <option value="default">Default</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="name">Name A–Z</option>
+              <option value="default">Predeterminado</option>
+              <option value="price-asc">Precio: Menor a Mayor</option>
+              <option value="price-desc">Precio: Mayor a Menor</option>
+              <option value="name">Nombre A–Z</option>
             </select>
           </div>
         </aside>
@@ -72,7 +72,7 @@
         <!-- ── Items grid ──────────────────── -->
         <main class="menu-main">
           <div class="menu-top-bar">
-            <span class="result-count">{{ filtered.length }} items</span>
+            <span class="result-count">{{ filtered.length }} ítems</span>
             <div class="view-toggles">
               <button class="view-btn" :class="{ active: view === 'grid' }" @click="view = 'grid'" id="view-grid">
                 <Grid :size="16" />
@@ -96,8 +96,8 @@
 
           <div v-else-if="filtered.length === 0" class="empty-state">
             <div class="empty-icon">🔍</div>
-            <h3>No items found</h3>
-            <p>Try adjusting your search or filters.</p>
+            <h3>No se encontraron ítems</h3>
+            <p>Intenta ajustar tu búsqueda o filtros.</p>
           </div>
 
           <div v-else :class="view === 'grid' ? 'items-grid' : 'items-list'">
@@ -113,19 +113,19 @@
               </div>
               <div class="item-body">
                 <div class="item-badges">
-                  <span class="badge badge-primary" v-if="Number(item.menu_price) < 15">Value Pick</span>
+                  <span class="badge badge-primary" v-if="Number(item.menu_price) < 15">Selección Económica</span>
                   <span class="badge badge-warning" v-if="Number(item.menu_price) > 40">Premium</span>
                 </div>
                 <h4 class="item-name">{{ item.menu_name }}</h4>
-                <p class="item-desc">{{ item.menu_description || 'Fresh and delicious.' }}</p>
+                <p class="item-desc">{{ item.menu_description || 'Fresco y delicioso.' }}</p>
                 <div class="item-footer">
                   <span class="item-price">${{ Number(item.menu_price).toFixed(2) }}</span>
                   <div class="item-actions">
                     <RouterLink :to="`/menu/${item.id}`" class="btn btn-ghost btn-sm" @click.stop>
-                      Details
+                      Detalles
                     </RouterLink>
                     <button class="btn btn-primary btn-sm" @click.stop="addToCart(item)" :id="`add-${item.id}`">
-                      <Plus :size="14" /> Add
+                      <Plus :size="14" /> Agregar
                     </button>
                   </div>
                 </div>
@@ -141,7 +141,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-import { Search, Grid, List, Plus } from 'lucide-vue-next'
+import { Search, Grid, List, Plus } from '@lucide/vue'
 import { useMenuStore } from '@/stores/menu'
 import { useCartStore } from '@/stores/cart'
 

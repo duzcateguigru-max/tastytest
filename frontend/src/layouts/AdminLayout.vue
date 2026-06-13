@@ -30,10 +30,10 @@
       <div class="sidebar-footer" v-if="!sidebarCollapsed">
         <RouterLink to="/" class="back-to-site">
           <ExternalLink :size="16" />
-          View Site
+          Ver Sitio
         </RouterLink>
         <button class="btn btn-ghost btn-sm w-full" @click="auth.logout(); router.push('/login')">
-          <LogOut :size="16" /> Sign Out
+          <LogOut :size="16" /> Cerrar Sesión
         </button>
       </div>
     </aside>
@@ -67,7 +67,7 @@ import {
   LayoutDashboard, ShoppingBag, UtensilsCrossed, Tag, Users,
   CalendarDays, Ticket, Star, Settings, LogOut, ExternalLink,
   PanelLeftClose, PanelLeftOpen
-} from 'lucide-vue-next'
+} from '@lucide/vue'
 import { useAuthStore } from '@/stores/auth'
 
 const auth = useAuthStore()
@@ -75,16 +75,16 @@ const router = useRouter()
 const route = useRoute()
 const sidebarCollapsed = ref(false)
 
-const navItems = [
-  { to: '/admin',              label: 'Dashboard',    icon: LayoutDashboard },
-  { to: '/admin/orders',       label: 'Orders',       icon: ShoppingBag },
-  { to: '/admin/menu',         label: 'Menu',         icon: UtensilsCrossed },
-  { to: '/admin/categories',   label: 'Categories',   icon: Tag },
-  { to: '/admin/customers',    label: 'Customers',    icon: Users },
-  { to: '/admin/reservations', label: 'Reservations', icon: CalendarDays },
-  { to: '/admin/coupons',      label: 'Coupons',      icon: Ticket },
-  { to: '/admin/reviews',      label: 'Reviews',      icon: Star },
-  { to: '/admin/settings',     label: 'Settings',     icon: Settings },
+const navItems: { to: string; label: string; icon: any; badge?: string }[] = [
+  { to: '/admin',              label: 'Tablero',       icon: LayoutDashboard },
+  { to: '/admin/orders',       label: 'Pedidos',       icon: ShoppingBag },
+  { to: '/admin/menu',         label: 'Menú',          icon: UtensilsCrossed },
+  { to: '/admin/categories',   label: 'Categorías',   icon: Tag },
+  { to: '/admin/customers',    label: 'Clientes',      icon: Users },
+  { to: '/admin/reservations', label: 'Reservas',      icon: CalendarDays },
+  { to: '/admin/coupons',      label: 'Cupones',       icon: Ticket },
+  { to: '/admin/reviews',      label: 'Reseñas',       icon: Star },
+  { to: '/admin/settings',     label: 'Configuración', icon: Settings },
 ]
 
 function isActive(to: string) {

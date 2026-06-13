@@ -6,17 +6,17 @@
     <div class="auth-card glass-card">
       <div class="auth-header">
         <RouterLink to="/" class="auth-logo">🍽️ FlavorHaven</RouterLink>
-        <h2>Welcome Back</h2>
-        <p>Sign in to your account</p>
+        <h2>Bienvenido</h2>
+        <p>Inicia sesión en tu cuenta</p>
       </div>
       <form @submit.prevent="handleLogin" class="auth-form" novalidate>
         <div class="input-group">
-          <label class="input-label" for="login-email">Email Address</label>
-          <input id="login-email" v-model="email" type="email" class="input" :class="{ error: errors.email }" placeholder="you@example.com" autocomplete="email" />
+          <label class="input-label" for="login-email">Correo Electrónico</label>
+          <input id="login-email" v-model="email" type="email" class="input" :class="{ error: errors.email }" placeholder="tu@ejemplo.com" autocomplete="email" />
           <span v-if="errors.email" class="input-error">{{ errors.email }}</span>
         </div>
         <div class="input-group">
-          <label class="input-label" for="login-password">Password</label>
+          <label class="input-label" for="login-password">Contraseña</label>
           <div class="password-field">
             <input id="login-password" v-model="password" :type="showPass ? 'text' : 'password'" class="input" :class="{ error: errors.password }" placeholder="••••••••" autocomplete="current-password" />
             <button type="button" class="toggle-pass" @click="showPass = !showPass" aria-label="Toggle password visibility">
@@ -27,13 +27,13 @@
         </div>
         <button type="submit" class="btn btn-primary btn-lg w-full" :disabled="auth.loading" id="login-submit-btn">
           <span v-if="auth.loading" class="spinner"></span>
-          <span v-else>Sign In</span>
+          <span v-else>Iniciar Sesión</span>
         </button>
         <span v-if="serverError" class="server-error">{{ serverError }}</span>
       </form>
       <div class="auth-footer">
-        <span>Don't have an account?</span>
-        <RouterLink to="/register" class="text-primary">Create one →</RouterLink>
+        <span>¿No tienes cuenta?</span>
+        <RouterLink to="/register" class="text-primary">Crear una →</RouterLink>
       </div>
     </div>
   </div>

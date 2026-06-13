@@ -1,7 +1,7 @@
 <template>
   <div class="orders-page">
     <div class="container">
-      <h1>My <span class="text-gradient">Orders</span></h1>
+      <h1>Mis <span class="text-gradient">Pedidos</span></h1>
 
       <div v-if="orders.loading" class="orders-list">
         <div v-for="n in 4" :key="n" class="order-skeleton glass-card">
@@ -13,9 +13,9 @@
 
       <div v-else-if="orders.orders.length === 0" class="empty-state">
         <div class="empty-icon">📦</div>
-        <h2>No orders yet</h2>
-        <p>Start by exploring our delicious menu.</p>
-        <RouterLink to="/menu" class="btn btn-primary btn-lg">Browse Menu</RouterLink>
+        <h2>Aún no tienes pedidos</h2>
+        <p>Empieza explorando nuestro delicioso menú.</p>
+        <RouterLink to="/menu" class="btn btn-primary btn-lg">Ver Menú</RouterLink>
       </div>
 
       <div v-else class="orders-list">
@@ -33,7 +33,7 @@
           <div class="order-card-right">
             <span class="order-price">${{ Number(order.order_total).toFixed(2) }}</span>
             <RouterLink :to="`/orders/${order.id}`" class="btn btn-outline btn-sm" :id="`track-${order.id}`">
-              Track Order
+              Rastrear Pedido
             </RouterLink>
           </div>
         </div>

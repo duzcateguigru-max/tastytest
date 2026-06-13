@@ -17,14 +17,14 @@
     <!-- Charts row -->
     <div class="charts-row">
       <div class="chart-card glass-card">
-        <h3>Revenue (Last 7 Days)</h3>
+        <h3>Ingresos (7 Últimos Días)</h3>
         <div class="chart-container" v-if="adminStore.stats">
           <Bar :data="revenueChartData" :options="chartOptions" />
         </div>
         <div class="skeleton chart-skeleton" v-else></div>
       </div>
       <div class="chart-card glass-card">
-        <h3>Orders by Status</h3>
+        <h3>Pedidos por Estado</h3>
         <div class="chart-container doughnut" v-if="adminStore.stats">
           <Doughnut :data="statusChartData" :options="doughnutOptions" />
         </div>
@@ -35,8 +35,8 @@
     <!-- Recent orders -->
     <div class="recent-orders glass-card">
       <div class="section-top">
-        <h3>Recent Orders</h3>
-        <RouterLink to="/admin/orders" class="btn btn-ghost btn-sm">View All →</RouterLink>
+        <h3>Pedidos Recientes</h3>
+        <RouterLink to="/admin/orders" class="btn btn-ghost btn-sm">Ver Todos →</RouterLink>
       </div>
       <div v-if="orders.loading" class="orders-skeleton">
         <div v-for="n in 5" :key="n" class="skeleton" style="height: 52px; border-radius: var(--radius-md);"></div>
@@ -44,19 +44,19 @@
       <table v-else class="orders-table">
         <thead>
           <tr>
-            <th>Order #</th>
-            <th>Customer</th>
-            <th>Type</th>
+            <th>Pedido #</th>
+            <th>Cliente</th>
+            <th>Tipo</th>
             <th>Total</th>
-            <th>Status</th>
-            <th>Date</th>
+            <th>Estado</th>
+            <th>Fecha</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="order in recentOrders" :key="order.id">
             <td class="order-num">#{{ order.id }}</td>
-            <td>{{ order.customer_name ?? 'Guest' }}</td>
+            <td>{{ order.customer_name ?? 'Invitado' }}</td>
             <td><span class="type-tag">{{ order.order_type }}</span></td>
             <td class="order-total">${{ Number(order.order_total).toFixed(2) }}</td>
             <td>
@@ -66,7 +66,7 @@
             </td>
             <td class="date-cell">{{ formatDate(order.created_at) }}</td>
             <td>
-              <RouterLink :to="`/admin/orders/${order.id}`" class="btn btn-ghost btn-sm">View</RouterLink>
+              <RouterLink :to="`/admin/orders/${order.id}`" class="btn btn-ghost btn-sm">Ver</RouterLink>
             </td>
           </tr>
         </tbody>
@@ -96,10 +96,10 @@ const recentOrders = computed(() => orders.orders.slice(0, 10))
 const kpiCards = computed(() => {
   const s = adminStore.stats
   return [
-    { icon: '📦', label: 'Total Orders', value: s?.totalOrders ?? '–', color: '#f59e0b', trend: 'This month', trendUp: true },
-    { icon: '💰', label: 'Revenue', value: s ? `$${s.totalRevenue.toFixed(2)}` : '–', color: '#10b981', trend: 'This month', trendUp: true },
-    { icon: '👥', label: 'Customers', value: s?.totalCustomers ?? '–', color: '#3b82f6', trend: 'Total registered', trendUp: true },
-    { icon: '⏳', label: 'Pending Orders', value: s?.pendingOrders ?? '–', color: '#ef4444', trend: 'Need attention', trendUp: false },
+    { icon: '📦', label: 'Total Pedidos', value: s?.totalOrders ?? '–', color: '#f59e0b', trend: 'Este mes', trendUp: true },
+    { icon: '💰', label: 'Ingresos', value: s ? `$${s.totalRevenue.toFixed(2)}` : '–', color: '#10b981', trend: 'Este mes', trendUp: true },
+    { icon: '👥', label: 'Clientes', value: s?.totalCustomers ?? '–', color: '#3b82f6', trend: 'Total registrados', trendUp: true },
+    { icon: '⏳', label: 'Pedidos Pendientes', value: s?.pendingOrders ?? '–', color: '#ef4444', trend: 'Requieren atención', trendUp: false },
   ]
 })
 

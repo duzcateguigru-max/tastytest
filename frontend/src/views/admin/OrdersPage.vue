@@ -2,17 +2,17 @@
   <div class="admin-orders">
     <!-- Filters -->
     <div class="filters-bar glass-card">
-      <input v-model="search" class="input" placeholder="Search orders..." id="orders-search" style="max-width: 280px;" />
+      <input v-model="search" class="input" placeholder="Buscar pedidos..." id="orders-search" style="max-width: 280px;" />
       <select v-model="statusFilter" class="input" style="max-width: 160px;" id="status-filter">
-        <option value="">All Statuses</option>
+        <option value="">Todos los Estados</option>
         <option v-for="(s, id) in ORDER_STATUSES" :key="id" :value="id">{{ s.label }}</option>
       </select>
       <select v-model="typeFilter" class="input" style="max-width: 160px;" id="type-filter">
-        <option value="">All Types</option>
-        <option value="delivery">Delivery</option>
-        <option value="collection">Pickup</option>
+        <option value="">Todos los Tipos</option>
+        <option value="delivery">Entrega</option>
+        <option value="collection">Recogida</option>
       </select>
-      <span class="filter-count">{{ filtered.length }} orders</span>
+      <span class="filter-count">{{ filtered.length }} pedidos</span>
     </div>
 
     <!-- Table -->
@@ -23,14 +23,14 @@
       <table v-else class="data-table">
         <thead>
           <tr>
-            <th>Order #</th>
-            <th>Customer</th>
-            <th>Type</th>
-            <th>Items</th>
+            <th>Pedido #</th>
+            <th>Cliente</th>
+            <th>Tipo</th>
+            <th>Artículos</th>
             <th>Total</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th>Actions</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
             <td class="font-bold">#{{ order.id }}</td>
             <td>{{ order.customer_name ?? 'Guest' }}</td>
             <td><span class="type-tag">{{ order.order_type === 'delivery' ? '🚚' : '🏪' }} {{ order.order_type }}</span></td>
-            <td class="text-muted">{{ order.order_menus?.length ?? 0 }} items</td>
+            <td class="text-muted">{{ order.order_menus?.length ?? 0 }} artículos</td>
             <td class="text-primary font-bold">${{ Number(order.order_total).toFixed(2) }}</td>
             <td>
               <select
@@ -53,7 +53,7 @@
             </td>
             <td class="text-sm text-muted">{{ formatDate(order.created_at) }}</td>
             <td>
-              <RouterLink :to="`/admin/orders/${order.id}`" class="btn btn-ghost btn-sm">Detail</RouterLink>
+              <RouterLink :to="`/admin/orders/${order.id}`" class="btn btn-ghost btn-sm">Detalle</RouterLink>
             </td>
           </tr>
         </tbody>
@@ -85,8 +85,8 @@ const filtered = computed(() => {
 })
 
 async function updateStatus(id: number, status_id: number) {
-  try { await orders.updateStatus(id, status_id); toast.success('Status updated') }
-  catch { toast.error('Failed to update status') }
+  try { await orders.updateStatus(id, status_id); toast.success('Estado actualizado') }
+  catch { toast.error('Error al actualizar el estado') }
 }
 
 function formatDate(d: string) {
