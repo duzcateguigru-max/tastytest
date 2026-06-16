@@ -5,12 +5,7 @@
       <input v-model="search" class="input" placeholder="Buscar pedidos..." id="orders-search" style="max-width: 280px;" />
       <select v-model="statusFilter" class="input" style="max-width: 160px;" id="status-filter">
         <option value="">Todos los Estados</option>
-        <option v-for="(s, id) in ORDER_STATUSES" :key="id" :value="id">{{ s.label }}</option>
-      </select>
-      <select v-model="typeFilter" class="input" style="max-width: 160px;" id="type-filter">
-        <option value="">Todos los Tipos</option>
-        <option value="delivery">Entrega</option>
-        <option value="collection">Recogida</option>
+        <option v-for="s in STATUS_OPTIONS" :key="s.value" :value="s.value">{{ s.label }}</option>
       </select>
       <span class="filter-count">{{ filtered.length }} pedidos</span>
     </div>
@@ -36,19 +31,18 @@
         <tbody>
           <tr v-for="order in filtered" :key="order.id">
             <td class="font-bold">#{{ order.id }}</td>
-            <td>{{ order.customer_name ?? 'Guest' }}</td>
-            <td><span class="type-tag">{{ order.order_type === 'delivery' ? '🚚' : '🏪' }} {{ order.order_type }}</span></td>
-            <td class="text-muted">{{ order.order_menus?.length ?? 0 }} artículos</td>
-            <td class="text-primary font-bold">${{ Number(order.order_total).toFixed(2) }}</td>
+            <td>{{ order.customer_name ?? 'Invitado' }}</td>
+            <td><span class="type-tag">📋 {{ order.status }}</span></td>
+            <td class="text-primary font-bold">${{ Number(order.total).toFixed(2) }}</td>
             <td>
               <select
-                :value="order.status_id"
-                @change="updateStatus(order.id, Number(($event.target as HTMLSelectElement).value))"
+                :value="order.status"
+                @change="updateStatus(order.id, ($event.target as HTMLSelectElement).value)"
                 class="status-select"
-                :style="{ color: ORDER_STATUSES[order.status_id]?.color ?? '#fff' }"
+                :style="{ color: getStatusColor(order.status) }"
                 :id="`status-${order.id}`"
               >
-                <option v-for="(s, sid) in ORDER_STATUSES" :key="sid" :value="sid">{{ s.label }}</option>
+                <option v-for="s in STATUS_OPTIONS" :key="s.value" :value="s.value">{{ s.label }}</option>
               </select>
             </td>
             <td class="text-sm text-muted">{{ formatDate(order.created_at) }}</td>
@@ -65,27 +59,40 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useOrdersStore, ORDER_STATUSES } from '@/stores/orders'
+import { useOrdersStore } from '@/stores/orders'
 import { useToast } from 'vue-toastification'
+
+const STATUS_OPTIONS = [
+  { value: 'pending',    label: '⏳ Pendiente' },
+  { value: 'processing', label: '🔄 Procesando' },
+  { value: 'preparing',  label: '👨‍🍳 Preparando' },
+  { value: 'on-the-way', label: '🚚 En Camino' },
+  { value: 'delivered',  label: '✅ Entregado' },
+  { value: 'cancelled',  label: '❌ Cancelado' },
+  { value: 'completed',  label: '🎉 Completado' },
+]
+
+function getStatusColor(status: string) {
+  const colors: Record<string, string> = { pending: '#fbbf24', processing: '#3b82f6', preparing: '#8b5cf6', 'on-the-way': '#f59e0b', delivered: '#10b981', cancelled: '#ef4444', completed: '#10b981' }
+  return colors[status] ?? '#a3a3a3'
+}
 
 const orders = useOrdersStore()
 const toast = useToast()
 const search = ref('')
 const statusFilter = ref('')
-const typeFilter = ref('')
 
 const filtered = computed(() => {
-  return orders.orders.filter((o) => {
+  return orders.orders.filter((o: any) => {
     const q = search.value.toLowerCase()
     const matchSearch = !q || String(o.id).includes(q) || (o.customer_name ?? '').toLowerCase().includes(q)
-    const matchStatus = !statusFilter.value || String(o.status_id) === String(statusFilter.value)
-    const matchType = !typeFilter.value || o.order_type === typeFilter.value
-    return matchSearch && matchStatus && matchType
+    const matchStatus = !statusFilter.value || o.status === statusFilter.value
+    return matchSearch && matchStatus
   })
 })
 
-async function updateStatus(id: number, status_id: number) {
-  try { await orders.updateStatus(id, status_id); toast.success('Estado actualizado') }
+async function updateStatus(id: number, status: string) {
+  try { await orders.updateStatus(id, status as any); toast.success('Estado actualizado') }
   catch { toast.error('Error al actualizar el estado') }
 }
 

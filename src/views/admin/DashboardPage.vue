@@ -58,10 +58,10 @@
             <td class="order-num">#{{ order.id }}</td>
             <td>{{ order.customer_name ?? 'Invitado' }}</td>
             <td><span class="type-tag">{{ order.order_type }}</span></td>
-            <td class="order-total">${{ Number(order.order_total).toFixed(2) }}</td>
+            <td class="order-total">${{ Number(order.total).toFixed(2) }}</td>
             <td>
-              <span :class="`badge badge-${getStatusBadge(order.status_id)}`">
-                {{ getStatusLabel(order.status_id) }}
+              <span class="badge" :style="{ background: getStatusColor(order.status), color: '#fff' }">
+                {{ order.status ?? 'pending' }}
               </span>
             </td>
             <td class="date-cell">{{ formatDate(order.created_at) }}</td>
@@ -84,7 +84,7 @@ import {
   Title, Tooltip, Legend, ArcElement,
 } from 'chart.js'
 import { useAdminStore } from '@/stores/admin'
-import { useOrdersStore, ORDER_STATUSES } from '@/stores/orders'
+import { useOrdersStore } from '@/stores/orders'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
@@ -134,9 +134,9 @@ const chartOptions = {
 }
 const doughnutOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' as const, labels: { color: '#a3a3a3', padding: 16, font: { size: 12 } } } } }
 
-function getStatusLabel(id: number) { return ORDER_STATUSES[id]?.label ?? 'Processing' }
-function getStatusBadge(id: number) {
-  if (id >= 5) return 'success'; if (id === 6) return 'danger'; return 'warning'
+function getStatusColor(status: string) {
+  const colors: Record<string, string> = { pending: '#fbbf24', processing: '#3b82f6', preparing: '#8b5cf6', 'on-the-way': '#f59e0b', delivered: '#10b981', cancelled: '#ef4444', completed: '#10b981' }
+  return colors[status] ?? '#6b7280'
 }
 function formatDate(d: string) {
   return new Date(d).toLocaleDateString('en-US', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' })

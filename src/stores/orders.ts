@@ -5,22 +5,13 @@ import { useCartStore } from './cart'
 
 export interface Order {
   id: number
-  order_id: string
   customer_name: string
-  order_total: number
-  order_type: 'delivery' | 'collection'
-  status_id: number
-  status_name?: string
+  customer_email?: string
+  customer_phone?: string
+  status: string
+  total: number
+  notes?: string
   created_at: string
-  order_menus?: OrderMenu[]
-  location?: { location_name: string }
-}
-
-export interface OrderMenu {
-  id: number
-  name: string
-  quantity: number
-  price: number
 }
 
 export const ORDER_STATUSES: Record<number, { label: string; color: string }> = {
@@ -83,8 +74,8 @@ export const useOrdersStore = defineStore('orders', () => {
     }
   }
 
-  async function updateStatus(id: number, status_id: number) {
-    const res = await ordersApi.update(id, { status_id })
+  async function updateStatus(id: number, status: string) {
+    const res = await ordersApi.update(id, { status })
     const idx = orders.value.findIndex((o) => o.id === id)
     if (idx !== -1) orders.value[idx] = res.data.data ?? res.data
     if (currentOrder.value?.id === id) currentOrder.value = res.data.data ?? res.data

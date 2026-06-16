@@ -21,18 +21,19 @@ export const useAdminStore = defineStore('admin', () => {
       // Fetch all data in parallel for dashboard KPIs
       const [ordersRes, customersRes] = await Promise.all([
         ordersApi.getAll({ page_limit: 500 }),
-        customersApi.getAll({ page_limit: 1 }),
+        customersApi.getAll({ page_limit: 500 }),
       ])
       const orders = ordersRes.data.data ?? ordersRes.data
-      const totalCustomers = customersRes.data.pagination?.total ?? customersRes.data.length ?? 0
-      const totalRevenue = orders.reduce((s: number, o: any) => s + Number(o.order_total ?? 0), 0)
-      const pendingOrders = orders.filter((o: any) => o.status_id === 1).length
+      const customersList = customersRes.data.data ?? customersRes.data
+      const totalCustomers = Array.isArray(customersList) ? customersList.length : 0
+      const totalRevenue = orders.reduce((s: number, o: any) => s + Number(o.total ?? 0), 0)
+      const pendingOrders = orders.filter((o: any) => o.status === 'pending').length
 
       // Revenue by day (last 7 days)
       const dayMap: Record<string, number> = {}
       orders.forEach((o: any) => {
         const day = o.created_at?.substring(0, 10)
-        if (day) dayMap[day] = (dayMap[day] ?? 0) + Number(o.order_total ?? 0)
+        if (day) dayMap[day] = (dayMap[day] ?? 0) + Number(o.total ?? 0)
       })
       const revenueByDay = Object.entries(dayMap)
         .sort(([a], [b]) => a.localeCompare(b))
@@ -42,7 +43,7 @@ export const useAdminStore = defineStore('admin', () => {
       // Orders by status
       const statusMap: Record<string, number> = {}
       orders.forEach((o: any) => {
-        const s = o.status_name ?? `Status ${o.status_id}`
+        const s = o.status ?? 'pending'
         statusMap[s] = (statusMap[s] ?? 0) + 1
       })
       const ordersByStatus = Object.entries(statusMap).map(([status, count]) => ({ status, count }))
